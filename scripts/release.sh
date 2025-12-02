@@ -14,7 +14,7 @@ pnpm install
 
 # Build the Next.js application
 echo "📦 Building application..."
-npm run build
+pnpm run build
 
 # Generate Prisma client
 echo "📝 Generating Prisma client..."

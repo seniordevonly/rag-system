@@ -4,13 +4,16 @@ set -e
 
 echo "🚀 Starting release process..."
 
-# Install pnpm globally
+# Install pnpm globally using npm
 echo "📦 Installing pnpm..."
-npm install -g pnpm
+npm install -g pnpm@latest
+
+# Verify pnpm installation
+pnpm --version
 
 # Install dependencies
 echo "📦 Installing dependencies..."
-pnpm install
+pnpm install --frozen-lockfile
 
 # Build the Next.js application
 echo "📦 Building application..."

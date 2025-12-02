@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  name        String   // Display name in table
+  title       String
+  type        String   // "pdf" or "link"
+  url         String?  // Original URL if type is "link"
+  fileName    String?  // Original filename if type is "pdf"
+  fileSize    Int?     // Size in bytes
+  content     String   @db.Text
+  dataset     String?  // Category/tag for organization
+  status      String   @default("processing") // processing, embedded, ready, failed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  chunks      Chunk[]
+  
+  @@index([createdAt])
+  @@index([dataset])
+  @@index([status])
+}
+
+model Chunk {
+  id          String   @id @default(cuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  content     String   @db.Text
+  embedding   Unsupported("vector(1536)")?  // Adjust dimension based on your model
+  metadata    Json?    // Store page number, section, etc.
+  createdAt   DateTime @default(now())
+  
+  @@index([documentId])
+}
+
+model Chat {
+  id          String   @id @default(cuid())
+  title       String   @default("New Chat")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  messages    Message[]
+  
+  @@index([createdAt])
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  chatId      String
+  chat        Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  role        String   // "user" or "assistant"
+  content     String   @db.Text
+  sources     Json?    // Store retrieved chunk IDs and metadata
+  createdAt   DateTime @default(now())
+  
+  @@index([chatId, createdAt])
+}

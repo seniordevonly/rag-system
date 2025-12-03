@@ -2,12 +2,10 @@
   "name": "seniordev-rag",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": "25.2.1"
   },
   "scripts": {
-    "heroku-prebuild": "npm install -g pnpm@latest && pnpm --version",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

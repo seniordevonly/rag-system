@@ -4,20 +4,15 @@ set -e
 
 echo "🚀 Starting release process..."
 
-# Install pnpm globally using npm
-echo "📦 Installing pnpm..."
-npm install -g pnpm@latest
 
-# Verify pnpm installation
-pnpm --version
 
 # Install dependencies
 echo "📦 Installing dependencies..."
-pnpm install --frozen-lockfile
+npm install
 
 # Build the Next.js application
 echo "📦 Building application..."
-pnpm run build
+npm run build
 
 # Generate Prisma client
 echo "📝 Generating Prisma client..."

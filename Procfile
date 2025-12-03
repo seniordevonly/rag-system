@@ -1,2 +1,2 @@
-release: ./scripts/release.sh
-web: npm run start -- -p $PORT
+web: npm start
+release: npx prisma migrate deploy

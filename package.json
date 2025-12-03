@@ -10,8 +10,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "biome check",
-    "format": "biome format --write",
-    "postinstall": "prisma generate"
+    "format": "biome format --write"
   },
   "dependencies": {
     "@ai-sdk/cohere": "^2.0.18",

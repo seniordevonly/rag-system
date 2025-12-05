@@ -10,7 +10,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const MAX_CONTEXT_CHUNKS = 5;
+const MAX_CONTEXT_CHUNKS = 50;
 const SIMILARITY_THRESHOLD = 0.2;
 const SEARCH_LIMIT = 50; // Reduced from 50 for faster search
 const USE_RERANK = false; // Disable reranking by default (adds 3-5s latency)

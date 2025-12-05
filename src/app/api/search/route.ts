@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 const DEFAULT_LIMIT = 10;
-const SEARCH_LIMIT = 20;
+const SEARCH_LIMIT = 50;
 const MIN_SIMILARITY = 0.2;
 
 interface SearchRequest {
